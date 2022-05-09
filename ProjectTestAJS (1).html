@@ -33,18 +33,21 @@
 	<div ng-show="isSet(1)">
 	
 	<div ng-controller="DSLop">
-		Name: <input type="text" name="" ng-model="searchName">
-		Age: <input type="number" name="" ng-model="searchAge">
+		Name: <input type="text" name="" ng-model="userInput.name">
+		Age: <input type="number" name="" ng-model="userInput.age">
 		Class:
 		
 		<select
-      ng-options="option.name group by option.type for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption"></select>
+      ng-options=" option.name for option in DSClass.availableOptions"
+      ng-model="DSClass.selectedOption">
+      	
+      </select>
+       	
 		<!-- {{DSStudent}} -->
 		<!-- {{DSClass.selectedOption.name}} -->
 
 		<!-- btn search student -->
-		<button ng-click="searchObj(searchName,searchAge,DSClass.selectedOption.name)">Search</button>
+		<button ng-click="searchObj(searchName,searchAge,DSClass.selectedOption.name,DSClass.availableOptionsClass.type)">Search</button>
 		
 		<!-- btn load student -->
 		<button ng-click="loadAllStudent()">Load All Student</button>
@@ -60,14 +63,16 @@
 					<th>Name</th>
 					<th>Age</th>
 					<th>Class</th>
+					
 					<th colspan= "2">Edit or Remove</th>
 				</tr>
 			</thead>
-			<tr ng-repeat="Student in DSStudent | filter :{'name':searchName,'age':searchAge,'lop':searchClass}">
+			<tr ng-repeat="Student in DSStudent | filter :search | filter: {'lop':searchClass }">
 					<td>{{$index}}</td>
 					<td>{{Student.name}}</td>
 					<td>{{Student.age}}</td>
 					<td>{{Student.lop}}</td>
+					
 					<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student,$index)">Sua</a></td>
 					<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
 					
@@ -83,8 +88,8 @@
 	<div >
 		<!-- submit form add student and them class da chon vao mang selectedClass -->
 		<form ng-submit="addStudent(form);addSelectedClass(DSClass.selectedOption)">
-			Name: <input type="text" name="" ng-model="form.name">
-			Age: <input type="number" name="" ng-model="form.age">
+			Name: <input type="text" name="" ng-model="form.name" required>
+			Age: <input type="number" name="" ng-model="form.age" required>
 			 
 		<div ng-controller="DSLop">
 			Class:
@@ -92,6 +97,7 @@
 		<select 
       ng-options="option.name group by option.type for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption"></select>
+
 		</div>
 		<input type="submit" name="" value="Add">
 		<br>
@@ -140,10 +146,12 @@
       <input type="submit" value="Add" name="">
 		</form> -->
 		<form >
-			Class: <input type="text" name="" ng-model="formClass.name">
+			Class: <input type="text" name="" ng-model="formClass.name" required>
 			Grade:
-			<select ng-options="option.type for option in DSClass.availableOptionsClass"
-      ng-model="DSClass.selectedOption"></select>
+			<select ng-options="option.name for option in DSClass.availableOptions"
+      ng-model="DSClass.selectedOption">
+      		<option ></option>
+      </select>
       <input type="submit" value="Add Class" name="" ng-click="addClass(formClass)">
 		</form>
 	</div>
@@ -158,7 +166,7 @@
 			Grade: {{DSClass.selectedOption.type}}
 			<br> 
 			Danh sach Grade: <select
-      ng-options="option.type for option in DSClass.availableOptionsClass"
+      ng-options="option.type for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption"></select>
       <input type="submit" value="Save" name="">
 		</form>
@@ -172,7 +180,7 @@
 	<div ng-controller="DSLop">
 		<form ng-submit="editStudent(formEditStudent)">
 			Name: <input type="text" name="" ng-model="formEditStudent.name">
-			Age: <input type="text" name="" ng-model="formEditStudent.age">
+			Age: <input type="number" name="" ng-model="formEditStudent.age">
 			<br>
 			Class: {{DSClass.selectedOption.name}}
 			<!-- {{formEditStudent}} -->

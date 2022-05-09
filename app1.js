@@ -6,34 +6,40 @@ var myApp = angular.module('QuanLySinhVien',[]);
 
 	// controller danh sach lop
 	function ClassController($scope) {
+		
 	}
 
 	// controller danh sach sinh vien
 	function StudentController($scope) {
 		$scope.DSClass = {
 		     availableOptions: [
-		       {name: '11A',type:'Lop 11'},
-		       {name: '11B',type:'Lop 11'},
-		       {name: '12C',type:'Lop 12'}
+		      {name: '11',type:'11'},
+		       {name: '11A',type:'11'},
+		       {name: '11B',type:'11'},
+		       {name: '12',type:'12'},
+		       {name: '12C',type:'12'}
 		     ],
-		     selectedOption: {name: '12C',type:'Lop 12'},
-		     availableOptionsClass:[{id: '1',type:'Lop 11'},
-		       {id: '2',type:'Lop 12'}],
-		       selectedOptionClass: {id: '1',type:'Lop 11'}//This sets the default value of the select in the ui
+		     selectedOption: {name: '',type:''},
+		     availableOptionsClass:[{id: '1',type:'11'},
+		       {id: '2',type:'12'}],
+		       selectedOptionClass: {id: '1',type:'11'},
+		       availableOptionsGrade: [{id: '1',type:'11'},
+		       {id: '2',type:'12'},{id:'3',type:'11A'},{id:'4',type:'11B'},{id:'5',type:'12C'}],
+		       selectedOptionGrade: {id: '1',type:'11'}//This sets the default value of the select in the ui
 		     };
 		$scope.selectedClass = [
-		     	{ name: '11A',type:'Lop 11'},
-		     	{name: '11B',type:'Lop 11'},
-		     	{name: '12C',type:'Lop 12'},
-		     	{name: '12C',type:'Lop 12'}
+		     	{ name: '11A',type:'11'},
+		     	{name: '11B',type:'11'},
+		     	{name: '12C',type:'12'},
+		     	{name: '12C',type:'12'}
 		     ];
 
 		 	//khoi tao mang student
 		var DSStudent = [
-				{name:'do an',age:'12',lop:'11A'},
-				{name:'ngoc an',age:'12',lop:'11B'},
-				{name:'tra my',age:'12',lop:'12C'},
-				{name:'ta khoa',age:'12',lop:'12C'},
+				{name:'do an',age:12,lop:'11A',grade:'11'},
+				{name:'ngoc an',age:12,lop:'11B',grade:'11'},
+				{name:'tra my',age:12,lop:'12C',grade:'12'},
+				{name:'ta khoa',age:12,lop:'12C',grade:'12'},
 			];
 
 		$scope.click = function(){
@@ -60,9 +66,11 @@ var myApp = angular.module('QuanLySinhVien',[]);
 			$scope.form = {
 			name:'',
 			age:'',
-			lop:''
+			lop:'',
+			grade:''
 		};
 			form.lop = $scope.DSClass.selectedOption.name;
+			form.grade = $scope.DSClass.selectedOption.type;
 			$scope.DSStudent.push(form);
 			alert("Add successfull!");
 			$scope.setTab(1);
@@ -73,7 +81,7 @@ var myApp = angular.module('QuanLySinhVien',[]);
 				name:'',
 				type:''
 		};
-			formClass.type = $scope.DSClass.selectedOption.type;
+			formClass.type = $scope.DSClass.selectedOption.name;
 			$scope.DSClass.availableOptions[$scope.DSClass.availableOptions.length] = formClass;
 			alert("Add successfull!");
 			//delete $scope.formClass;
@@ -143,19 +151,50 @@ var myApp = angular.module('QuanLySinhVien',[]);
 			delete $scope.searchName;
 			delete $scope.searchAge;
 			delete $scope.searchClass;
+			delete $scope.searchGrade;
 		$scope.loadAllStudent = function(){
 			
-			delete $scope.searchName;
-			delete $scope.searchAge;
-			delete $scope.searchClass;
+			// delete $scope.searchName;
+			 delete $scope.searchGrade;
+			 delete $scope.searchClass;
+			delete $scope.search;
 		}
-		$scope.searchObj = function (name,age,classSt) {
+		$scope.search = {};
+		$scope.userInput = {};
+		// $scope.applySearch = function() {
+		//     for(prop in $scope.userInput) {
+		//         $scope.search[prop] = $scope.userInput[prop];
+		//     }
+		// };
+		$scope.searchObj = function (name,age,classSt,gradeSt) {
 			// body...
-			if(name !='' && age !='' || classSt !=''){
-				$scope.searchName = name;
-				$scope.searchAge = age;
-				$scope.searchClass = classSt;
-			}
+			 if(classSt !=''){
+			// 	$scope.searchName = name;
+			// 	$scope.searchAge = age;
+			 	$scope.searchClass = classSt;
+			 }
+			 if(gradeSt !=''){
+			// 	$scope.searchName = name;
+			// 	$scope.searchAge = age;
+			 	$scope.searchGrade = $scope.DSClass.selectedOptionClass.type;
+			 }
+			//alert($scope.DSClass.selectedOptionClass.type);
+			//$scope.userInput[lop] = classSt;
+			if(name !="" ||age!=""){
+			for(prop in $scope.userInput) {
+				
+				// if(name != '')
+				// $scope.userInput[name] = $scope.userInput[name];
+				// if(age != '')
+				// $scope.userInput[age] = $scope.userInput[age];
+				// if(classSt != ''){
+				// $scope.userInput ='';
+				// $scope.userInput[lop] = classSt;
+				// }
+				 //alert(prop);
+		        $scope.search[prop] = $scope.userInput[prop];
+		    }
+		}
 		}
 		
 		$scope.indexClassSL = indexClassSL;
@@ -181,8 +220,8 @@ var myApp = angular.module('QuanLySinhVien',[]);
 	myApp.controller('TabController',['$scope',function ($scope) {
 		// body...
 		$scope.tab = 1;
-			$scope.searchName = '';
-			$scope.searchAge = '';
+			// $scope.searchName = '';
+			// $scope.searchAge = '';
 		$scope.setTab = function (newTab) {
 			// body...
 			$scope.tab = newTab;
