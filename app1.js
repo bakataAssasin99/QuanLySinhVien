@@ -39,7 +39,7 @@ var myApp = angular.module('QuanLySinhVien',[]);
 				{name:'do an',age:12,lop:'11A',grade:'11'},
 				{name:'ngoc an',age:12,lop:'11B',grade:'11'},
 				{name:'tra my',age:12,lop:'12C',grade:'12'},
-				{name:'ta khoa',age:12,lop:'12C',grade:'12'},
+				{name:'ta khoa',age:12,lop:'12C',grade:'12'}
 			];
 
 		$scope.click = function(){
