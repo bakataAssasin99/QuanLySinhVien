@@ -5,8 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-	<script type="text/javascript" src="app1.js"></script>
+	<script type="text/javascript" src="testapp.js"></script>
+	<script type="text/javascript" src="dirPagination.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script type="text/javascript">
 	
 	</script>
@@ -21,7 +23,7 @@
 			<a href ng-click="setTab(1)" >Sinh vien</a>
 		</li>
 		<li ng-class="{ active: isSet(4) }">
-			<a href ng-click="setTab(4)">Lop</a>
+			<a href ng-click="setTab(4)" ng-model="checked" ng-init="checked=true">Lop</a>
 		</li>
 	</ul>
 	</div>
@@ -38,11 +40,13 @@
 		Class:
 		
 		<select
-      ng-options=" option.name for option in DSClass.availableOptions"
+      ng-options=" option.name group by option.type for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption">
       	
       </select>
-       	
+      Grade:
+      <select ng-options=" grade.type for grade in DSClass.availableOptionsClass" ng-model="DSClass.selectedOptionClass">
+      </select>
 		<!-- {{DSStudent}} -->
 		<!-- {{DSClass.selectedOption.name}} -->
 
@@ -55,29 +59,35 @@
 
 	<!-- btn add student -->
 	<button ng-class="{ active: isSet(2) }"><a href ng-click="setTab(2)" >Add Student</a></button>
-		 
-		<table>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<table id="tableID" style="padding: 10px;">
 			<thead>
 				<tr >
-					<th>STT</th>
+					<th >STT</th>
 					<th>Name</th>
 					<th>Age</th>
 					<th>Class</th>
-					
+					<th>Grade</th>
 					<th colspan= "2">Edit or Remove</th>
 				</tr>
 			</thead>
-			<tr ng-repeat="Student in DSStudent | filter :search | filter: {'lop':searchClass }">
-					<td>{{$index}}</td>
+			<tr dir-paginate="Student in DSStudent | filter :search | filter: {'lop':searchClass } | itemsPerPage:5 ">
+					<td>{{Student.id}}</td>
 					<td>{{Student.name}}</td>
 					<td>{{Student.age}}</td>
 					<td>{{Student.lop}}</td>
-					
+					<td>{{Student.grade}}</td>
 					<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student,$index)">Sua</a></td>
 					<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
 					
 				</tr>
 		</table>	
+
+		 <dir-pagination-controls ng-if="checked"
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
 		<!-- {{selectedClass}} -->
 	
 	</div>
@@ -89,7 +99,7 @@
 		<!-- submit form add student and them class da chon vao mang selectedClass -->
 		<form ng-submit="addStudent(form);addSelectedClass(DSClass.selectedOption)">
 			Name: <input type="text" name="" ng-model="form.name" required>
-			Age: <input type="number" name="" ng-model="form.age" required>
+			Age: <input type="date" name="" ng-model="form.age" required>
 			 
 		<div ng-controller="DSLop">
 			Class:
@@ -131,6 +141,11 @@
 
 				</tr>
 			</table>
+			<dir-pagination-controls ng-show="show"
+                            max-size="5"
+                            direction-links="true"
+                            boundary-links="true" >
+                    </dir-pagination-controls>
 			<!-- {{DSClass.selectedClass}} -->
 		</div>
 
@@ -146,7 +161,7 @@
       <input type="submit" value="Add" name="">
 		</form> -->
 		<form >
-			Class: <input type="text" name="" ng-model="formClass.name" required>
+			Class: <input type="text" name="" ng-model="formClass.name">
 			Grade:
 			<select ng-options="option.name for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption">
@@ -154,6 +169,7 @@
       </select>
       <input type="submit" value="Add Class" name="" ng-click="addClass(formClass)">
 		</form>
+		<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
 	</div>
 
 	</div>
@@ -166,13 +182,13 @@
 			Grade: {{DSClass.selectedOption.type}}
 			<br> 
 			Danh sach Grade: <select
-      ng-options="option.type for option in DSClass.availableOptions"
+      ng-options="option.name for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption"></select>
       <input type="submit" value="Save" name="">
 		</form>
+		<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
 	</div>
 	
-	<button ng-click="click()">click</button>
 	</div>
 
 	<div ng-show="isSet(3)">
@@ -180,7 +196,7 @@
 	<div ng-controller="DSLop">
 		<form ng-submit="editStudent(formEditStudent)">
 			Name: <input type="text" name="" ng-model="formEditStudent.name">
-			Age: <input type="number" name="" ng-model="formEditStudent.age">
+			Birhtdate: <input type="date" name="" ng-model="formEditStudent.birthdate">
 			<br>
 			Class: {{DSClass.selectedOption.name}}
 			<!-- {{formEditStudent}} -->
@@ -188,10 +204,12 @@
 		Danh Sach Class: 
 		
 		<select
-      ng-options="option.name group by option.type for option in DSClass.availableOptions"
+      ng-options="option.name for option in DSClass.availableOptions"
       ng-model="DSClass.selectedOption"></select>
 		
 		<input type="submit" name="" value="Save">
+	</form>
+
 		<br>
 		
 		<button ng-class="{ active: isSet(1) }"><a href ng-click=" setTab(1)">Back</a></button>
