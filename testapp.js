@@ -27,7 +27,7 @@ var myApp = angular.module('QuanLySinhVien',['angularUtils.directives.dirPaginat
 			],
 			selectedOptionGrade: {id: '1',type:'11'}
 		};
-		var selectedClass = [];
+			var selectedClass = [];
 		 	//khoi tao mang student
 		 	var DSStudent = [];
 		 	for(var i=0;i<100;i++){
@@ -65,7 +65,7 @@ var myApp = angular.module('QuanLySinhVien',['angularUtils.directives.dirPaginat
 				grade:'',
 				birthdate:''
 			};
-			form.id = $scope.DSStudent.length;
+			form.id = $scope.DSStudent.length+1;
 			form.birthdate = form.age;
 			form.age = new Date().getFullYear() - form.birthdate.getFullYear();
 			form.lop = $scope.DSClass.selectedOption.name;
@@ -99,9 +99,10 @@ var myApp = angular.module('QuanLySinhVien',['angularUtils.directives.dirPaginat
 			indexStudent = EditStudent.id; 
 			formEditStudent.name = EditStudent.name;
 			formEditStudent.age = EditStudent.age;
-			$scope.DSClass.selectedOption = $scope.selectedClass[indexStudent];
+			$scope.DSClass.selectedOption = $scope.selectedClass[indexStudent-1];
 			formEditStudent.lop = $scope.DSClass.selectedOption.name;
 			formEditStudent.grade = $scope.DSClass.selectedOption.type;
+			formEditStudent.birthdate = EditStudent.birthdate;
 		}
 		$scope.loadFormeditClass = function (EditClass,index){
 			indexClassSL = index; 
@@ -114,9 +115,12 @@ var myApp = angular.module('QuanLySinhVien',['angularUtils.directives.dirPaginat
 			var index = $scope.DSStudent.indexOf(student);
 			if(indexStudent > -1){
 				$scope.DSStudent[indexStudent-1].name = student.name; 
-				$scope.DSStudent[indexStudent-1].age = student.age; 
+				$scope.DSStudent[indexStudent-1].age = new Date().getFullYear() - student.birthdate.getFullYear() ; 
 				$scope.DSStudent[indexStudent-1].lop = $scope.DSClass.selectedOption.name; 
-				$scope.DSStudent[indexStudent-1].grade = $scope.DSClass.selectedOption.type; 
+				$scope.DSStudent[indexStudent-1].grade = $scope.DSClass.selectedOption.type;
+				$scope.selectedClass[indexStudent-1].name =  $scope.DSStudent[indexStudent-1].lop;
+				$scope.selectedClass[indexStudent-1].type =  $scope.DSStudent[indexStudent-1].grade;
+				$scope.DSStudent[indexStudent-1].birthdate = student.birthdate; 
 			}
 			$scope.setTab(1);
 		}

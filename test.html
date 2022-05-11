@@ -57,11 +57,10 @@
 			<td>{{Student.name}}</td>
 			<td>{{Student.age}}</td>
 			<td>{{Student.lop}}</td>
-			<td>{{Student.grade}}</td>
 			<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student)">Sua</a></td>
 			<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
 		</tr>
-	</table>	
+	</table>
 	<dir-pagination-controls ng-if="checked"
 	max-size="5"
 	direction-links="true"
