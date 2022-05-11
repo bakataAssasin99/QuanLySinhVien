@@ -9,12 +9,8 @@
 	<script type="text/javascript" src="dirPagination.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script type="text/javascript">
-	
-	</script>
-	<style type="text/css">
-	
-	</style>
+	<script type="text/javascript"></script>
+	<style type="text/css"></style>
 </head>
 <body ng-controller="TabController" ng-controller="DSLop">
 	<h1><b>EzStudy</b></h1>
@@ -26,198 +22,149 @@
 			<a href ng-click="setTab(4)" ng-model="checked" ng-init="checked=true">Lop</a>
 		</li>
 	</ul>
-	</div>
-	<div ng-controller="DSSinhVien">
-
-
-		<!-- form List Student -->
-
+</div>
+<div ng-controller="DSSinhVien">
+	<!-- form List Student -->
 	<div ng-show="isSet(1)">
-	
-	<div ng-controller="DSLop">
-		Name: <input type="text" name="" ng-model="userInput.name">
-		Age: <input type="number" name="" ng-model="userInput.age">
-		Class:
-		
-		<select
-      ng-options=" option.name group by option.type for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption">
-      	
-      </select>
-      Grade:
-      <select ng-options=" grade.type for grade in DSClass.availableOptionsClass" ng-model="DSClass.selectedOptionClass">
-      </select>
-		<!-- {{DSStudent}} -->
-		<!-- {{DSClass.selectedOption.name}} -->
-
+		<div ng-controller="DSLop">
+			Name: <input type="text" name="" ng-model="userInput.name">
+			Age: <input type="number" name="" ng-model="userInput.age">
+			Class:
+			<select
+			ng-options=" option.name group by option.type for option in DSClass.availableOptions"
+			ng-model="DSClass.selectedOption">
+		</select>
 		<!-- btn search student -->
 		<button ng-click="searchObj(searchName,searchAge,DSClass.selectedOption.name,DSClass.availableOptionsClass.type)">Search</button>
-		
 		<!-- btn load student -->
 		<button ng-click="loadAllStudent()">Load All Student</button>
 	</div>
-
 	<!-- btn add student -->
 	<button ng-class="{ active: isSet(2) }"><a href ng-click="setTab(2)" >Add Student</a></button>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<table id="tableID" style="padding: 10px;">
-			<thead>
-				<tr >
-					<th >STT</th>
-					<th>Name</th>
-					<th>Age</th>
-					<th>Class</th>
-					<th>Grade</th>
-					<th colspan= "2">Edit or Remove</th>
-				</tr>
-			</thead>
-			<tr dir-paginate="Student in DSStudent | filter :search | filter: {'lop':searchClass } | itemsPerPage:5 ">
-					<td>{{Student.id}}</td>
-					<td>{{Student.name}}</td>
-					<td>{{Student.age}}</td>
-					<td>{{Student.lop}}</td>
-					<td>{{Student.grade}}</td>
-					<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student,$index)">Sua</a></td>
-					<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
-					
-				</tr>
-		</table>	
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<table id="tableID" style="padding: 10px;">
+		<thead>
+			<tr >
+				<th >STT</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Class</th>
+				<th colspan= "2">Edit or Remove</th>
+			</tr>
+		</thead>
+		<tr dir-paginate="Student in DSStudent | filter :search | filter: {'lop':searchClass } | itemsPerPage:5 ">
+			<td>{{Student.id}}</td>
+			<td>{{Student.name}}</td>
+			<td>{{Student.age}}</td>
+			<td>{{Student.lop}}</td>
+			<td>{{Student.grade}}</td>
+			<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student)">Sua</a></td>
+			<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
+		</tr>
+	</table>	
+	<dir-pagination-controls ng-if="checked"
+	max-size="5"
+	direction-links="true"
+	boundary-links="true" >
+</dir-pagination-controls>
+</div>
 
-		 <dir-pagination-controls ng-if="checked"
-                            max-size="5"
-                            direction-links="true"
-                            boundary-links="true" >
-                    </dir-pagination-controls>
-		<!-- {{selectedClass}} -->
-	
-	</div>
-
-	<!-- form Add student -->
-	<div ng-show="isSet(2)" >
-		<h1><b>Add Student</b></h1>
+<!-- form Add student -->
+<div ng-show="isSet(2)" >
+	<h1><b>Add Student</b></h1>
 	<div >
 		<!-- submit form add student and them class da chon vao mang selectedClass -->
 		<form ng-submit="addStudent(form);addSelectedClass(DSClass.selectedOption)">
 			Name: <input type="text" name="" ng-model="form.name" required>
 			Age: <input type="date" name="" ng-model="form.age" required>
-			 
-		<div ng-controller="DSLop">
-			Class:
-		
-		<select 
-      ng-options="option.name group by option.type for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption"></select>
-
-		</div>
-		<input type="submit" name="" value="Add">
-		<br>
-		
+			<div ng-controller="DSLop">
+				Class:
+				<select 
+				ng-options="option.name group by option.type for option in DSClass.availableOptions"
+				ng-model="DSClass.selectedOption"></select>
+			</div>
+			<input type="submit" name="" value="Add">
+			<br>
 		</form>
 		<button ng-class="{ active: isSet(1) }"><a href ng-click=" setTab(1)">Back</a></button>
-		
-		<!-- {{DSStudent}} -->
 	</div>
-	</div>
-	
-	
-	<div ng-show="isSet(4)">
-		<h3 ng-class="{ active: isSet(5) }"><a href ng-click="setTab(5);click()">Add Class</a></h3>
-		<div ng-controller="DSLop">
-			<table>
-				<thead>
-					<tr>
-						<th>STT</th>
-						<th>Khối</th>
-						<th>Lớp</th>
-						<th colspan="2">Edit or Remove</th>
-					</tr>
-				</thead>
-				<tr ng-repeat="class in DSClass.availableOptions track by $index">
-					<td>{{$index}}</td>
-					<td>{{class.type}}</td>
-					<td>{{class.name}}</td>
-					<td ng-class="{ active: isSet(6) }" ><a href ng-click="setTab(6);loadFormeditClass(class,$index)">Sua</a></td>
-					<td  ><a href ng-click="removeClass(class)">Xoa</a></td>
-
+</div>
+<div ng-show="isSet(4)">
+	<h3 ng-class="{ active: isSet(5) }"><a href ng-click="setTab(5);click()">Add Class</a></h3>
+	<div ng-controller="DSLop">
+		<table>
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Khối</th>
+					<th>Lớp</th>
+					<th colspan="2">Edit or Remove</th>
 				</tr>
-			</table>
-			<dir-pagination-controls ng-show="show"
-                            max-size="5"
-                            direction-links="true"
-                            boundary-links="true" >
-                    </dir-pagination-controls>
-			<!-- {{DSClass.selectedClass}} -->
-		</div>
-
-	</div>
-	<div ng-show="isSet(5)">
-		<h1><b>Add Class</b></h1>
+			</thead>
+			<tr ng-repeat="class in DSClass.availableOptions track by $index">
+				<td>{{$index}}</td>
+				<td>{{class.type}}</td>
+				<td>{{class.name}}</td>
+				<td ng-class="{ active: isSet(6) }" ><a href ng-click="setTab(6);loadFormeditClass(class,$index)">Sua</a></td>
+				<td  ><a href ng-click="removeClass(class)">Xoa</a></td>
+			</tr>
+		</table>
+		<dir-pagination-controls ng-show="show"
+		max-size="5"
+		direction-links="true"
+		boundary-links="true" >
+	</dir-pagination-controls>
+</div>
+</div>
+<div ng-show="isSet(5)">
+	<h1><b>Add Class</b></h1>
 	<div ng-controller="DSLop" >
-		<!-- <form  ng-submit="addClass(formClass)" >
-			Class: <input type="text" name="" ng-model="formClass.name">
-			Grade: <select
-      ng-options="option.type for option in DSClass.availableOptionsClass"
-      ng-model="DSClass.selectedOption"></select>
-      <input type="submit" value="Add" name="">
-		</form> -->
 		<form >
 			Class: <input type="text" name="" ng-model="formClass.name">
 			Grade:
 			<select ng-options="option.name for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption">
-      		<option ></option>
-      </select>
-      <input type="submit" value="Add Class" name="" ng-click="addClass(formClass)">
-		</form>
-		<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
-	</div>
-
-	</div>
-	
-	<div ng-show="isSet(6)">
-		<h1><b>Edit Class</b></h1>
+			ng-model="DSClass.selectedOption">
+			<option ></option>
+		</select>
+		<input type="submit" value="Add Class" name="" ng-click="addClass(formClass)">
+	</form>
+	<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
+</div>
+</div>
+<div ng-show="isSet(6)">
+	<h1><b>Edit Class</b></h1>
 	<div ng-controller="DSLop">
 		<form ng-submit="editClass(formEditClass)">
 			Class: <input type="text" name="" ng-model="formEditClass.name">
 			Grade: {{DSClass.selectedOption.type}}
 			<br> 
 			Danh sach Grade: <select
-      ng-options="option.name for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption"></select>
-      <input type="submit" value="Save" name="">
+			ng-options="option.name for option in DSClass.availableOptions"
+			ng-model="DSClass.selectedOption"></select>
+			<input type="submit" value="Save" name="">
 		</form>
 		<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
 	</div>
-	
-	</div>
-
-	<div ng-show="isSet(3)">
-		<h1><b>Edit student</b></h1>
+</div>
+<div ng-show="isSet(3)">
+	<h1><b>Edit student</b></h1>
 	<div ng-controller="DSLop">
 		<form ng-submit="editStudent(formEditStudent)">
 			Name: <input type="text" name="" ng-model="formEditStudent.name">
 			Birhtdate: <input type="date" name="" ng-model="formEditStudent.birthdate">
 			<br>
 			Class: {{DSClass.selectedOption.name}}
-			<!-- {{formEditStudent}} -->
 			<br>
-		Danh Sach Class: 
-		
-		<select
-      ng-options="option.name for option in DSClass.availableOptions"
-      ng-model="DSClass.selectedOption"></select>
-		
-		<input type="submit" name="" value="Save">
-	</form>
-
+			Danh Sach Class: 
+			<select
+			ng-options="option.name for option in DSClass.availableOptions"
+			ng-model="DSClass.selectedOption"></select>
+			<input type="submit" name="" value="Save">
+		</form>
 		<br>
-		
 		<button ng-class="{ active: isSet(1) }"><a href ng-click=" setTab(1)">Back</a></button>
-		
-		<!-- {{indexStudent}} -->
-		<!-- {{DSStudent}} -->
 	</div>
-	</div>
+</div>
 </div>
 </body>
 </html>
