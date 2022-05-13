@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="QuanLySinhVien">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,39 +9,50 @@
 	<script type="text/javascript" src="testapp.js"></script>
 	<script type="text/javascript" src="dirPagination.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
-	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script type="text/javascript"></script>
 	<style type="text/css"></style>
 </head>
-<body ng-controller="TabController" ng-controller="DSLop">
-	<h1><b>EzStudy</b></h1>
-	<div><ul>
-		<li ng-class="{ active: isSet(1) }">
-			<a href ng-click="setTab(1)" >Sinh vien</a>
-		</li>
-		<li ng-class="{ active: isSet(4) }">
-			<a href ng-click="setTab(4)" ng-model="checked" ng-init="checked=true">Lop</a>
-		</li>
-	</ul>
-</div>
-<div ng-controller="DSSinhVien">
-	<!-- <ng-include src="'tabAddStudent.html'"></ng-include> -->
-	<!-- form List Student -->
-	<div ng-show="isSet(1)" ng-include="'tabStudent.html'">
-		
-</div>
 
-<!-- form Add student -->
-<div ng-include="'tabAddStudent.html'" ng-show="isSet(2)">
-</div>
-<div ng-show="isSet(4)" ng-include="'tabClass.html'">
-</div>
-<div ng-show="isSet(5)" ng-include="'tabAddClass.html'">
-</div>
-<div ng-show="isSet(6)" ng-include="'tabEditClass.html'">
-</div>
-<div ng-show="isSet(3)" ng-include="'tabEditStudent.html'">
-</div>
-</div>
+<body ng-controller="TabController" ng-controller="DSLop">
+
+	<h1><b>EzStudy</b></h1>
+
+	<div>
+		<ul>
+			<li ng-class="{ active: isSet(1) }">
+				<a href ng-click="setTab(1)">Sinh vien</a>
+			</li>
+			<li ng-class="{ active: isSet(4) }">
+				<a href ng-click="setTab(4)" ng-model="checked" ng-init="checked=true">Lop</a>
+			</li>
+		</ul>
+	</div>
+
+	<div ng-controller="DSSinhVien">
+
+		<!-- <ng-include src="'tabAddStudent.html'"></ng-include> -->
+		<!-- form List Student -->
+		<div ng-show="isSet(1)" ng-include="'tabStudent.html'">
+
+		</div>
+
+		<!-- form Add student -->
+		<div ng-include="'tabAddStudent.html'" ng-show="isSet(2)">
+		</div>
+
+		<div ng-show="isSet(4)" ng-include="'tabClass.html'">
+		</div>
+
+		<div ng-show="isSet(5)" ng-include="'tabAddClass.html'">
+		</div>
+
+		<div ng-show="isSet(6)" ng-include="'tabEditClass.html'">
+		</div>
+
+		<div ng-show="isSet(3)" ng-include="'tabEditStudent.html'">
+		</div>
+	</div>
 </body>
+
 </html>

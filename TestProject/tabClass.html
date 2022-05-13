@@ -1,25 +1,26 @@
 <h3 ng-class="{ active: isSet(5) }"><a href ng-click="setTab(5);click()">Add Class</a></h3>
-	<div >
-		<table>
-			<thead>
-				<tr>
-					<th>STT</th>
-					<th>Khối</th>
-					<th>Lớp</th>
-					<th colspan="2">Edit or Remove</th>
-				</tr>
-			</thead>
-			<tr ng-repeat="class in DSClass.availableOptions track by $index ">
-				<td>{{$index}}</td>
-				<td>{{class.type}}</td>
-				<td>{{class.name}}</td>
-				<td ng-class="{ active: isSet(6) }" ><a href ng-click="setTab(6);loadFormeditClass(class,$index)">Sua</a></td>
-				<td  ><a href ng-click="removeClass(class)">Xoa</a></td>
+
+<div>
+	<table>
+		<thead>
+			<tr>
+				<th>STT</th>
+				<th>Khối</th>
+				<th>Lớp</th>
+				<th colspan="2">Edit or Remove</th>
 			</tr>
-		</table>
-		<dir-pagination-controls ng-show="show"
-		max-size="5"
-		direction-links="true"
-		boundary-links="true" >
+		</thead>
+		<tr ng-repeat="class in DSClass.availableOptions track by $index ">
+			<td>{{$index}}</td>
+			<td>{{class.type}}</td>
+			<td>{{class.name}}</td>
+			<td ng-class="{ active: isSet(6) }"><a href ng-click="setTab(6);loadFormeditClass(class,$index)">Sua</a>
+			</td>
+			<td><a href ng-click="removeClass(class)">Xoa</a></td>
+		</tr>
+	</table>
+
+	<dir-pagination-controls ng-show="show" max-size="5" direction-links="true" boundary-links="true">
 	</dir-pagination-controls>
+
 </div>
