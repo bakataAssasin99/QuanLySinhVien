@@ -1,0 +1,40 @@
+<div ng-controller="DSLop">
+	Name: <input type="text" name="" ng-model="userInput.name">
+	Age: <input type="number" name="" ng-model="userInput.age">
+	Class:
+	<select
+	ng-options=" option.name group by option.type for option in DSClass.availableOptions"
+	ng-model="DSClass.selectedOption">
+</select>
+<!-- btn search student -->
+<button ng-click="searchObj(searchName,searchAge,DSClass.selectedOption.name,DSClass.availableOptionsClass.type,userInput.birthdate)">Search</button>
+<!-- btn load student -->
+<button ng-click="loadAllStudent()">Load All Student</button>
+</div>
+<!-- btn add student -->
+<button ng-class="{ active: isSet(2) }"><a href ng-click="setTab(2)" >Add Student</a></button>
+<link rel="stylesheet" type="text/css" href="style.css">
+<table id="tableID" style="padding: 10px;">
+	<thead>
+		<tr >
+			<th >STT</th>
+			<th>Name</th>
+			<th>Age</th>
+			<th>Class</th>
+			<th colspan= "2">Edit or Remove</th>
+		</tr>
+	</thead>
+	<tr dir-paginate="Student in DSStudent | filter :search | filter: {'lop':searchClass } | itemsPerPage:5 ">
+		<td>{{Student.id}}</td>
+		<td>{{Student.name}}</td>
+		<td>{{Student.age}}</td>
+		<td>{{Student.lop}}</td>
+		<td ng-class="{ active: isSet(3) }" ><a href ng-click="setTab(3);loadFormeditStudent(Student)">Sua</a></td>
+		<td  ><a href ng-click="removeStudent(Student)">Xoa</a></td>
+	</tr>
+</table>
+<dir-pagination-controls ng-show="show"
+max-size="5"
+direction-links="true"
+boundary-links="true" >
+</dir-pagination-controls>

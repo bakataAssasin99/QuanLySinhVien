@@ -1,0 +1,17 @@
+<h1><b>Edit student</b></h1>
+<div ng-controller="">
+	<form ng-submit="editStudent(formEditStudent)">
+		Name: <input type="text" name="" ng-model="formEditStudent.name">
+		Birhtdate: <input type="date" name="" ng-model="formEditStudent.birthdate">
+		<br>
+		Class: {{DSClass.selectedOption.name}}
+		<br>
+		Danh Sach Class: 
+		<select
+		ng-options="option.name for option in DSClass.availableOptions"
+		ng-model="DSClass.selectedOption"></select>
+		<input type="submit" name="" value="Save">
+	</form>
+	<br>
+	<button ng-class="{ active: isSet(1) }"><a href ng-click=" setTab(1)">Back</a></button>
+</div>
