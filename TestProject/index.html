@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="StudentManagement">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+	<script type="text/javascript" src="dirPagination.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script type="text/javascript"></script>
+	<style type="text/css"></style>
+</head>
+<body ng-controller="TabController" ng-controller="mdClass">
+	<h1><b>EzStudy</b></h1>
+	<div><ul>
+		<li ng-class="{ active: isSet('tabStudent') }">
+			<a href ng-click="setTab('tabStudent')" >Sinh vien</a>
+		</li>
+		<li ng-class="{ active: isSet('tabClass') }">
+			<a href ng-click="setTab('tabClass')" ng-model="checked" ng-init="checked=true">Lop</a>
+		</li>
+	</ul>
+</div>
+<div ng-controller="mdStudent">
+	<!-- <ng-include src="'tabAddStudent.html'"></ng-include> -->
+	<!-- form List Student -->
+	<div ng-show="isSet('tabStudent')" ng-include="'tabStudent.html'">
+		
+</div>
+
+<!-- form Add student -->
+
+<div ng-show="isSet('tabEdittStudents')" ng-include="'tabEdittStudents.html'">
+</div>
+<div ng-include="'tabAddStudent.html'" ng-show="isSet('tabAddStudent')">
+</div>
+<div ng-show="isSet('tabClass')" ng-include="'tabClass.html'">
+</div>
+<div ng-show="isSet('tabAddClass')" ng-include="'tabAddClass.html'">
+</div>
+<div ng-show="isSet('tabEditClass')" ng-include="'tabEditClass.html'">
+</div>
+<!-- <div ng-show="isSet('tabEdittStudents')" ng-include="'tabEdittStudents.html'">
+</div> -->
+</div>
+</body>
+</html>

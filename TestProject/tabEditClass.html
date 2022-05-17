@@ -1,17 +1,13 @@
 <h1><b>Edit Class</b></h1>
-
-<div ng-controller="DSLop">
-	<form ng-submit="editClass(formEditClass)">
-		Class: <input type="text" name="" ng-model="formEditClass.name">
-		Grade: {{DSClass.selectedOption.type}}
-		
-		<br>
-		Danh sach Grade: <select ng-options="option.name for option in DSClass.availableOptions"
-			ng-model="DSClass.selectedOption"></select>
-		
-		<input type="submit" value="Save" name="">
-	</form>
-
-	<button ng-class="{ active: isSet(4) }"><a href ng-click=" setTab(4)">Back</a></button>
-
-</div>
+	<div ng-controller="mdClass">
+		<form ng-submit="editClass(formEditClass)">
+			Class: <input type="text" name="" ng-model="formEditClass.name">
+			Grade: {{ListClass.selectedOption.type}}
+			<br> 
+			Danh sach Grade: <select
+			ng-options="option.name for option in ListClass.availableOptions"
+			ng-model="ListClass.selectedOption"></select>
+			<input type="submit" value="Save" name="">
+		</form>
+		<button ng-class="{ active: isSet('tabClass') }"><a href ng-click=" setTab('tabClass')">Back</a></button>
+	</div>
