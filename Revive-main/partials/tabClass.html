@@ -1,0 +1,20 @@
+<section>
+	<a href ng-click="moveTabAddClass()">Add Class</a>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Lớp</th>
+					<th colspan="2">Edit or Remove</th>
+				</tr>
+			</thead>
+			<tr ng-repeat="class in ListClass track by $index ">
+				<td>{{$index}}</td>
+				<td>{{class.prefix}}{{class.name}}</td>
+				<td><a href="" ng-click="moveTabEditClass(class,$index)">Sua</a></td>
+				<td><a href="" ng-click="deleteClass(class)">Xoa</a></td>
+			</tr>
+		</table>
+	</div>
+</section>

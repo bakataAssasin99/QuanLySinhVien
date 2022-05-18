@@ -1,0 +1,15 @@
+<h1><b>Edit Class</b></h1>
+<div>
+	<form>
+		Class: <input type="text" name="" ng-model="objEditClass.name" required>
+		Parent: {{parentClass}}
+		<br>
+		Danh sach Grade:
+		<select ng-model="parentClass">
+			<option ng-repeat="class in ListClass">{{class.prefix}}{{class.name}}</option>
+		</select>
+		<input type="submit" value="Save" ng-click="editClass(objEditClass.name)">
+		<input type="submit" ng-click="moveTabClass()" value="Back"></input>
+	</form>
+
+</div>

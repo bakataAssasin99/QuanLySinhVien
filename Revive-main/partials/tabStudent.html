@@ -1,0 +1,34 @@
+<section>
+	<form action="">
+		Name: <input type="text" name="" ng-model="userInput.name">
+		Age: <input type="number" name="" ng-model="userInput.age">
+		Class:
+		<select ng-model="userInput.lop">
+			<option ng-repeat="class in ListClass">{{class.prefix}}{{class.name}}</option>
+		</select>
+		<input type="submit" value="Search" ng-click="searchObjStudent(userInput.name,userInput.age,userInput.lop)">
+		<input type="submit" value="Load All Student" ng-click="loadAllStudent()">
+	</form>
+	<a href ng-click="moveTabAddStudent()">Add Student</a>
+	<table id="tableID" style="padding: 10px;">
+		<thead>
+			<tr>
+				<th>STT</th>
+				<th>Name</th>
+				<th>Age</th>
+				<th>Class</th>
+				<th colspan="2">Edit or Remove</th>
+			</tr>
+		</thead>
+		<tr dir-paginate="Student in ListStudent | filter :search | filter: {'lop':searchClass }  | itemsPerPage:5">
+			<td>{{Student.id}}</td>
+			<td>{{Student.name}}</td>
+			<td>{{Student.age}}</td>
+			<td>{{Student.lop}}</td>
+			<td><a href ng-click="moveTabEditStudent(Student,Student.id)">Edit</a></td>
+			<td><a href ng-click="removeStudent(Student)">Remove</a></td>
+		</tr>
+	</table>
+	<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+	</dir-pagination-controls>
+</section>

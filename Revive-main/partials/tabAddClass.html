@@ -1,0 +1,14 @@
+<section>
+        <h1><b>Add Class</b></h1>
+        <div>
+                <form>
+                        Classname: <input type="text" name="" id="" ng-model="className" required>{{className}}
+                        Classgrade: <select ng-model="classGrade">
+                                <option ng-repeat="class in ListClass">{{class.prefix}}{{class.name}}</option>
+                        </select>{{classGrade}}
+                        <input type="submit" value="Luu" name="" id="" ng-click="addClass(className,classGrade)">
+                        <input type="submit" ng-click="moveTabClass()" value="Back"></input>
+                </form>
+
+        </div>
+</section>

@@ -1,0 +1,44 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+div,h5,#tableID{
+    margin-top: 10px;
+}
+input{
+    padding: 5px;
+}
+    #tableID , th, td,button{
+        border:1px solid black;
+        padding: 10px;
+    }
+    #tableID {
+        
+        border-collapse:collapse;
+    }
+    h1{
+        text-align: center;
+    }
+    ul{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: plum;
+    }
+    li{
+        float: left;
+    }
+    li a{
+        display: inline-block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    li a:hover{
+        background-color: red;
+    }
+
+    

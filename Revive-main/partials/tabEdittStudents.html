@@ -1,0 +1,18 @@
+<h1><b>Edit student</b></h1>
+<div>
+	<form ng-submit="editStudent(objEditStudent.name,objEditStudent.age,objEditStudent.lop)">
+		Name: <input type="text" name="" ng-model="objEditStudent.name" required>
+		Age: <input type="date" name="" ng-model="objEditStudent.birthdate">
+		<br>
+		Class: {{objEditStudent.lop}}
+		<br>
+		Danh Sach Class:
+		<select ng-model="objEditStudent.lop">
+			<option ng-repeat="class in ListClass">{{class.prefix}}{{class.name}}</option>
+		</select>
+		<input type="submit" name="" value="Save">
+
+	</form>
+	<br>
+	<a href ng-click="moveTabStudent()">Back</a>
+</div>

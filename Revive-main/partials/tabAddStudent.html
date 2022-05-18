@@ -1,0 +1,18 @@
+<section>
+	<h1><b>Add Student</b></h1>
+	<div>
+		<form>
+			Name: <input type="text" name="" ng-model="nameStudent" required>
+			Age: <input type="date" name="" ng-model="birthdateStudent" required>
+			<div>
+				Class:{{form.classs}}
+				<select ng-model="lopStudent">
+					<option ng-repeat="class in ListClass">{{class.prefix}}{{class.name}}</option>
+				</select>
+			</div>
+			<input type="submit" name="" value="Add" ng-click="addStudent(nameStudent,birthdateStudent,lopStudent)">
+			<input type="submit" value="Back" name="" ng-click="moveTabStudent()">
+			<br>
+		</form>
+	</div>
+</section>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <!-- <script src="/scripts/angular-route.min.js"></script> -->
+    <!-- <script src="/scripts/angular.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js">
+	</script>
+    <script src="/scripts/app.js"></script>
+	<script src="/scripts/dirPagination.js"></script>
+    <link rel="stylesheet" href="/styles/style.css">
+    
+</head>
+<body ng-app="myApp" ng-controller="myController">
+   
+    <h1><b>EzStudy</b></h1>
+	<div><ul>
+		<li>
+			<a href ="#/student" >Sinh vien</a>
+		</li>
+		<li>
+			<a href ="#/class" ng-click="buidClass()">Lop</a>
+		</li>
+	</ul>
+<div ng-view></div>
+</body>
+</html>
