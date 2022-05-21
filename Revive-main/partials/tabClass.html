@@ -12,8 +12,9 @@
 			<tr ng-repeat="class in ListClass track by $index ">
 				<td>{{$index}}</td>
 				<td>{{class.prefix}}{{class.name}}</td>
-				<td><a href="" ng-click="moveTabEditClass(class,$index)">Sua</a></td>
-				<td><a href="" ng-click="deleteClass(class)">Xoa</a></td>
+				<td><a ng-href="/indexMNStudent.html#/editClass/{{class.name}}/{{class.parentID}}/{{$index}}"
+						ng-click="moveTabEditClass(class,$index)">Sua</a></td>
+				<td><a ng-click="deleteClass(class)">Xoa</a></td>
 			</tr>
 		</table>
 	</div>

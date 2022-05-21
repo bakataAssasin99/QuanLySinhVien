@@ -25,7 +25,8 @@
 			<td>{{Student.name}}</td>
 			<td>{{Student.age}}</td>
 			<td>{{Student.lop}}</td>
-			<td><a href ng-click="moveTabEditStudent(Student,Student.id)">Edit</a></td>
+			<td><a ng-href="/indexMNStudent.html#/editStudent/{{$index}}"
+					ng-click="moveTabEditStudent(Student,Student.id)">Edit</a></td>
 			<td><a href ng-click="removeStudent(Student)">Remove</a></td>
 		</tr>
 	</table>
